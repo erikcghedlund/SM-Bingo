@@ -1,0 +1,322 @@
+{
+    "cards": [
+        {
+            "text": "Justerarna lämnar innan mötets slut",
+            "desc": "N/A",
+            "author": "avgåalla.nu",
+            "tags": ["SM"]
+        },
+        {
+            "text": "Ordningsfråga i ordningsfråga",
+            "desc": "N/A",
+            "author": "avgåalla.nu",
+            "tags": ["SM"]
+        },
+        {
+            "text": "Mötesordförande suckar högljutt åt någons förslag",
+            "desc": "N/A",
+            "author": "avgåalla.nu",
+            "tags": ["SM"]
+        },
+        {
+            "text": "Något kallas odemokratiskt",
+            "desc": "N/A",
+            "author": "avgåalla.nu",
+            "tags": ["SM"]
+        },
+        {
+            "text": "Ordningsfråga om beslutsordningen",
+            "desc": "N/A",
+            "author": "avgåalla.nu",
+            "tags": ["SM"]
+        },
+        {
+            "text": "Mötesordförande citerar mötesordningen fel",
+            "desc": "N/A",
+            "author": "avgåalla.nu",
+            "tags": ["SM"]
+        },
+        {
+            "text": "Mötesordförande börjar argumentera för en ståndpunkt i sakfråga",
+            "desc": "N/A",
+            "author": "avgåalla.nu",
+            "tags": ["SM"]
+        },
+        {
+            "text": "Någon tar upp en stadgeändring som övrig fråga",
+            "desc": "N/A",
+            "author": "avgåalla.nu",
+            "tags": ["SM"]
+        },
+        {
+            "text": "Mikrofonerna strular",
+            "desc": "N/A",
+            "author": "avgåalla.nu",
+            "tags": ["SM"]
+        },
+        {
+            "text": "För få eluttag",
+            "desc": "N/A",
+            "author": "avgåalla.nu",
+            "tags": ["SM"]
+        },
+        {
+            "text": "Tävling i vem som kan flest svåra ord",
+            "desc": "N/A",
+            "author": "avgåalla.nu",
+            "tags": ["SM"]
+        },
+        {
+            "text": "Streck i debatten-debatt > 15 min",
+            "desc": "N/A",
+            "author": "avgåalla.nu",
+            "tags": ["SM"]
+        },
+        {
+            "text": "Överkomplicerad energizer",
+            "desc": "N/A",
+            "author": "avgåalla.nu",
+            "tags": ["SM"]
+        },
+        {
+            "text": "Okynnesvotering",
+            "desc": "Votering på en oseriös fråga",
+            "author": "avgåalla.nu",
+            "tags": ["SM"]
+        },
+        {
+            "text": "Mötesordförande glömmer vilken punkt mötet är på",
+            "desc": "N/A",
+            "author": "avgåalla.nu",
+            "tags": ["SM"]
+        },
+        {
+            "text": "Något annat än en ordförandeklubba agerar ordförandeklubba",
+            "desc": "N/A",
+            "author": "avgåalla.nu",
+            "tags": ["SM"]
+        },
+        {
+            "text": "Rummet är en kvav öken",
+            "desc": "N/A",
+            "author": "avgåalla.nu",
+            "tags": ["SM"]
+        },
+        {
+            "text": "Folk utan rösträtt röstar",
+            "desc": "N/A",
+            "author": "avgåalla.nu",
+            "tags": ["SM"]
+        },
+        {
+            "text": "Någon drar över talartiden och vägrar sluta prata",
+            "desc": "N/A",
+            "author": "avgåalla.nu",
+            "tags": ["SM"]
+        },
+        {
+            "text": "En motion ingen förstår",
+            "desc": "N/A",
+            "author": "avgåalla.nu",
+            "tags": ["SM"]
+        },
+        {
+            "text": "Mötesordförande läser upp fel att-sats",
+            "desc": "N/A",
+            "author": "avgåalla.nu",
+            "tags": ["SM"]
+        },
+        {
+            "text": "Mötesordförande mumlar i rask takt",
+            "desc": "N/A",
+            "author": "avgåalla.nu",
+            "tags": ["SM"]
+        },
+        {
+            "text": "Personval i rösträknar och/eller justerarval",
+            "desc": "N/A",
+            "author": "avgåalla.nu",
+            "tags": ["SM"]
+        },
+        {
+            "text": "Ingen vet vilket ändringsyrkande som gäller",
+            "desc": "N/A",
+            "author": "Erik Hedlund",
+            "tags": ["SM"]
+        },
+        {
+            "text": "Teknikstrul följt av livlig diskussion om lösning",
+            "desc": "N/A",
+            "author": "avgåalla.nu",
+            "tags": ["SM"]
+        },
+        {
+            "text": "Motionssvar saknas",
+            "desc": "N/A",
+            "author": "Erik Hedlund",
+            "tags": ["SM"]
+        },
+        {
+            "text": "Någon kallas rättshaverist",
+            "desc": "N/A",
+            "author": "avgåalla.nu",
+            "tags": ["SM"]
+        },
+        {
+            "text": "Ingen revisor är på plats",
+            "desc": "N/A",
+            "author": "avgåalla.nu",
+            "tags": ["SM"]
+        },
+        {
+            "text": "Stadgarna säger emot sig själva",
+            "desc": "N/A",
+            "author": "avgåalla.nu",
+            "tags": ["SM"]
+        },
+        {
+            "text": "Årsmötet vill bryta mot stadgarna",
+            "desc": "N/A",
+            "author": "avgåalla.nu",
+            "tags": ["SM"]
+        },
+        {
+            "text": "Kaffet tar slut",
+            "desc": "N/A",
+            "author": "avgåalla.nu",
+            "tags": ["SM"]
+        },
+        {
+            "text": "\"Den svenska lagstiftningen för föreningar säger\"",
+            "desc": "N/A",
+            "author": "avgåalla.nu",
+            "tags": ["SM"]
+        },
+        {
+            "text": "\"På min tid\"",
+            "desc": "N/A",
+            "author": "avgåalla.nu",
+            "tags": ["SM"]
+        },
+        {
+            "text": "Wifi strular",
+            "desc": "N/A",
+            "author": "avgåalla.nu",
+            "tags": ["SM"]
+        },
+        {
+            "text": "Någon däremot? \"Nej\"",
+            "desc": "N/A",
+            "author": "avgåalla.nu",
+            "tags": ["SM"]
+        },
+        {
+            "text": "Någons telefon låter under beslut",
+            "desc": "N/A",
+            "author": "Erik Hedlund",
+            "tags": ["SM"]
+        },
+        {
+            "text": "Rösträknarna glömmer att meddela resultat av sluten omröstningo",
+            "desc": "N/A",
+            "author": "avgåalla.nu",
+            "tags": ["SM"]
+        },
+        {
+            "text": "Det saknas kandidater, vakantställning",
+            "desc": "N/A",
+            "author": "avgåalla.nu",
+            "tags": ["SM"]
+        },
+        {
+            "text": "Folk utan yrkanderätt yrkar",
+            "desc": "N/A",
+            "author": "avgåalla.nu",
+            "tags": ["SM"]
+        },
+        {
+            "text": "Ordvits ingen skrattar åt",
+            "desc": "N/A",
+            "author": "avgåalla.nu",
+            "tags": ["SM"]
+        },
+        {
+            "text": "Okynnesvotering",
+            "desc": "N/A",
+            "author": "avgåalla.nu",
+            "tags": ["SM"]
+        },
+        {
+            "text": "Styrelsen hävdar praxis",
+            "desc": "N/A",
+            "author": "avgåalla.nu",
+            "tags": ["SM"]
+        },
+        {
+            "text": "Årsredovisningen ej färdig",
+            "desc": "N/A",
+            "author": "avgåalla.nu",
+            "tags": ["SM"]
+        },
+        {
+            "text": "Det var bättre förr",
+            "desc": "N/A",
+            "author": "Erik Hedlund",
+            "tags": ["SM"]
+        },
+        {
+            "text": "Skämt om medias ekonomi",
+            "desc": "N/A",
+            "author": "Erik Hedlund",
+            "tags": ["SM"]
+        },
+        {
+            "text": "En nämnd kuppar SM",
+            "desc": "N/A",
+            "author": "Erik Hedlund",
+            "tags": ["SM"]
+        },
+        {
+            "text": "Diskussion som \"fråga\"",
+            "desc": "N/A",
+            "author": "Erik Hedlund",
+            "tags": ["SM"]
+        },
+        {
+            "text": "Styrelsen har smygit in en oseriös att-sats",
+            "desc": "N/A",
+            "author": "Erik Hedlund",
+            "tags": ["SM"]
+        },
+        {
+            "text": "\"Vi behöver inte prata om motionen då alla läst handlingarna\"",
+            "desc": "N/A",
+            "author": "Erik Hedlund",
+            "tags": ["SM"]
+        },
+        {
+            "text": "Någon klagar på betting inte öppnats",
+            "desc": "N/A",
+            "author": "Erik Hedlund",
+            "tags": ["SM"]
+        },
+        {
+            "text": "Någon anser betting vara riggat",
+            "desc": "N/A",
+            "author": "Erik Hedlund",
+            "tags": ["SM"]
+        },
+        {
+            "text": "Valkandidater har gått iväg",
+            "desc": "N/A",
+            "author": "Erik Hedlund",
+            "tags": ["SM"]
+        },
+        {
+            "text": "Valkandidat dyker inte upp på SM",
+            "desc": "N/A",
+            "author": "Erik Hedlund",
+            "tags": ["SM"]
+        }
+    ]
+}
