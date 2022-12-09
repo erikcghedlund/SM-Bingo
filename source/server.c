@@ -12,6 +12,8 @@
 #include <sys/stat.h>
 #endif
 
+#include "log.h"
+
 #define BUFFERSIZE 32
 #define DESCSIZE 128
 #define DEFAULT_CARD_FILE "./settings/cards.json"
@@ -51,6 +53,10 @@ int max(int x, int y) {
     return (((x > y) * x) + ((x <= y) * y));
 }
 
+int min(int x, int y) {
+    return (((x < y) * x) + ((x >= y) * y));
+}
+
 void swap(int * x, int * y) {
     int temp = *x;
     *x = *y;
@@ -69,24 +75,6 @@ int * random_numbers(int range, int nums) {
     free(choises);
     return ret_val;
 }
-
-char * timestr(char * buf) {
-    time_t T = time(NULL);
-    struct tm tm = *localtime(&T);
-    snprintf(buf, BUFFERSIZE, "%02d:%02d:%02d", tm.tm_hour, tm.tm_min, tm.tm_sec);
-    return buf;
-}
-
-int log_error(const char * fmt, ...) {
-    char buf[BUFFERSIZE];
-    int n = fprintf(stderr,  "[%s]: ", timestr(buf));
-    va_list argptr;
-    va_start(argptr, fmt);
-    n += vfprintf(stderr, fmt, argptr);
-    va_end(argptr);
-    return n;
-}
-
 // Tags not implented
 card add_card(int id, char * text, char * desc, char * author, ...) {
     int textn = strlen(text),
@@ -133,12 +121,12 @@ cJSON * json_from_file(char * filepath) {
 #endif
     FILE * f = fopen(filepath, "r");
     if (f == NULL) {
-        log_error("Failed to open file \"%s\"\n");
+        log_critical("Failed to open file \"%s\"\n");
         return NULL;
     }
     char * filebuf = (char *)malloc(sizeof(char) * size);
     if (filebuf == NULL) {
-        log_error("Failed to allocate file buffer \"%s\"\n");
+        log_critical("Failed to allocate file buffer \"%s\"\n");
         return NULL;
     }
     fread(filebuf, sizeof(char), size, f);
@@ -163,13 +151,14 @@ board add_board(int gridsize, const available_cards * cards){
             ret_val.cards[i][j] = (player_card) {cards->cards + cards_given[i*gridsize + j], 0};
     }
     free(cards_given);
+    return ret_val;
 }
 
 void del_board(const board * board) {
     for (int i = 0; i < board->size; i++) {
         free(board->cards[i]);
     }
-    //free(board->cards); // Currently a memory leak
+    free(board->cards); // Currently a memory leak
 }
 
 player add_player(int id, char * name, int gridsize, const available_cards * cards) {
@@ -184,12 +173,19 @@ void del_player(const player * player) {
     del_board(&player->board);
 }
 
-int main(void) {
+// Not implemented
+int parse_args(int argc, char ** argv) {
+    set_log_out(stderr);
+    return 0;
+}
+
+int main(int argc, char ** argv) {
+    parse_args(argc, argv);
     available_cards cards = read_card_file(DEFAULT_CARD_FILE);
     if (cards.size == 0)
         log_error("Failed retrieving cards from file %s\n", DEFAULT_CARD_FILE);
     else {
-        log_error("Successfully loaded %d cards\n", cards.size);
+        log_info("Successfully loaded %d cards\n", cards.size);
     }
     player test = add_player(0, "Test", 5, &cards);
     del_player(&test);
