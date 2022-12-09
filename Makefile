@@ -7,7 +7,7 @@ DIRECTORIES = debug third_party debug/bin debug/lib third_party/lib third_party/
 LIBRARIES = debug/lib/log.o 
 EXECUTABLES = debug/bin/server
 HEADERS = third_party/include/cJSON/cJSON.h
-TARGETS = $(EXECUTABLES) $(HEADERS)
+TARGETS = $(EXECUTABLES)
 
 CJSON_VERSION = 1.7.15
 CJSON_URL = https://github.com/DaveGamble/cJSON/archive/refs/tags/v$(CJSON_VERSION).tar.gz
@@ -18,13 +18,13 @@ clean:
 	rm -rf $(DIRECTORIES)
 
 debug/bin: debug
-	mkdir $@
+	find $@ 2> /dev/null || mkdir $@
 
 debug/lib: debug
-	mkdir $@
+	find $@ 2> /dev/null || mkdir $@
 
 debug:
-	mkdir $@
+	find $@ 2> /dev/null || mkdir $@
 
 debug/bin/server: debug/bin source/server.c debug/lib/log.o $(CJSON)
 	$(CC) -o $@ source/server.c $(CJSON) $(STD) $(DEBUG) debug/lib/log.o
@@ -33,22 +33,22 @@ debug/lib/log.o: debug/lib source/log.c
 	$(CC) -c -o $@ source/log.c $(STD) $(DEBUG)
 
 third_party/lib: third_party
-	mkdir $@
+	find $@ 2> /dev/null || mkdir $@
 
 third_party/lib/cJSON: third_party/lib
-	mkdir $@
+	find $@ 2> /dev/null || mkdir $@
 
 third_party/include: third_party
-	mkdir $@
+	find $@ 2> /dev/null || mkdir $@
 
 third_party/source: third_party
-	mkdir $@
+	find $@ 2> /dev/null || mkdir $@
 
 third_party:
-	mkdir $@
+	find $@ 2> /dev/null || mkdir $@
 
 third_party/cJSON.tar.gz: third_party
-	wget $(CJSON_URL) -O $@
+	find $@ 2> /dev/null || wget $(CJSON_URL) -O $@
 
 third_party/source/cJSON/cJSON.c: third_party/cJSON.tar.gz third_party/source
 	tar -xf  third_party/cJSON.tar.gz cJSON-$(CJSON_VERSION)/cJSON.c
