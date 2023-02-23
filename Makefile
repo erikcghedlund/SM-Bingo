@@ -4,7 +4,7 @@ STD = --std=c18
 DEBUG = -g
 
 DIRECTORIES = debug third_party
-LIBRARIES = debug/lib/log.o 
+LIBRARIES = debug/lib/log.o debug/lib/json_conversion.o
 EXECUTABLES = debug/bin/server
 HEADERS = third_party/include/cjson/cJSON.h
 TARGETS = $(EXECUTABLES)
@@ -23,10 +23,13 @@ debug/bin:
 debug/lib:
 	mkdir $@ --parent
 
-debug/bin/server: debug/bin source/server.c debug/lib/log.o $(CJSON)
-	$(CC) -o $@ source/server.c $(CJSON) $(STD) $(DEBUG) debug/lib/log.o -Ithird_party/include
+debug/bin/server: debug/bin source/server.c $(LIBRARIES) $(CJSON)
+	$(CC) -o $@ source/*.c $(CJSON) $(STD) $(DEBUG) -Ithird_party/include
 
 debug/lib/log.o: debug/lib source/log.c
+	$(CC) -c -o $@ source/log.c $(STD) $(DEBUG)
+
+debug/lib/json_conversion.o: debug/lib source/json_conversion.c
 	$(CC) -c -o $@ source/log.c $(STD) $(DEBUG)
 
 third_party/lib/cjson:

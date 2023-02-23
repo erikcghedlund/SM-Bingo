@@ -13,41 +13,12 @@
 #endif
 
 #include "log.h"
+#include "game_structures.h"
+#include "json_conversion.h"
 
 #define BUFFERSIZE 32
 #define DESCSIZE 128
 #define DEFAULT_CARD_FILE "./settings/cards.json"
-
-typedef struct card {
-    int id;
-    char * text, * desc, * author, **tags;
-} card;
-
-typedef struct player_card {
-    card * card;
-    char flipped;
-} player_card;
-
-typedef struct available_cards {
-    int size;
-    card * cards;
-} available_cards;
-
-typedef struct board {
-    int size;
-    player_card ** cards;
-} board;
-
-typedef struct player {
-    int id;
-    char * name;
-    board board;
-} player;
-
-typedef struct game {
-    int id;
-    player * players;
-} game;
 
 int max(int x, int y) {
     return (((x > y) * x) + ((x <= y) * y));
@@ -95,43 +66,12 @@ void destroy_card(const card * card) {
     free(card->author);
 }
 
-card json_card_to_struct(cJSON * j_card, int id) {
-    return (card) {id, cJSON_GetObjectItem(j_card, "text")->valuestring, cJSON_GetObjectItem(j_card, "desc")->valuestring, cJSON_GetObjectItem(j_card, "author")->valuestring};
-}
-
 available_cards retrieve_cards(cJSON * j_cards) {
     if (! cJSON_IsArray(j_cards)) return (available_cards) {0, NULL};
     int arr_size = cJSON_GetArraySize(j_cards);
     available_cards ret_val = {arr_size, (card *)malloc(sizeof(card)*arr_size)};
     for (int i = 0; i < arr_size; i++)
         json_card_to_struct(cJSON_GetArrayItem(j_cards, i), i);
-    return ret_val;
-}
-
-cJSON * json_from_file(char * filepath) {
-#ifdef _WIN32
-    //TODO
-#else
-    struct stat st;
-    if (stat(filepath, &st)) {
-        log_error("Failed to stat file %s\n", filepath);
-        return NULL;
-    }
-    unsigned long size = st.st_size;
-#endif
-    FILE * f = fopen(filepath, "r");
-    if (f == NULL) {
-        log_critical("Failed to open file \"%s\"\n");
-        return NULL;
-    }
-    char * filebuf = (char *)malloc(sizeof(char) * size);
-    if (filebuf == NULL) {
-        log_critical("Failed to allocate file buffer \"%s\"\n");
-        return NULL;
-    }
-    fread(filebuf, sizeof(char), size, f);
-    cJSON * ret_val =  cJSON_ParseWithLength(filebuf, size);
-    free(filebuf);
     return ret_val;
 }
 
