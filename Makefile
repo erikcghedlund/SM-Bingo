@@ -24,13 +24,13 @@ debug/lib:
 	mkdir $@ --parent
 
 debug/bin/server: debug/bin source/server.c $(LIBRARIES) $(CJSON)
-	$(CC) -o $@ source/*.c $(CJSON) $(STD) $(DEBUG) -Ithird_party/include
+	$(CC) -o $@ source/server.c $(LIBRARIES) $(CJSON) $(STD) $(DEBUG) -Ithird_party/include
 
 debug/lib/log.o: debug/lib source/log.c
 	$(CC) -c -o $@ source/log.c $(STD) $(DEBUG)
 
 debug/lib/json_conversion.o: debug/lib source/json_conversion.c
-	$(CC) -c -o $@ source/log.c $(STD) $(DEBUG)
+	$(CC) -c -o $@ source/json_conversion.c $(STD) $(DEBUG)
 
 third_party/lib/cjson:
 	mkdir $@ --parent
