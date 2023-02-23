@@ -1,7 +1,7 @@
 CC = gcc
 CJSON = third_party/lib/cjson/cJSON.o
 STD = --std=c18
-DEBUG = -g -wall
+DEBUG = -g -Wall
 
 DIRECTORIES = debug third_party
 LIBRARIES = debug/lib/log.o debug/lib/json_conversion.o
