@@ -58,25 +58,31 @@ card add_card(int id, char * text, char * desc, char * author, ...) {
     strncpy(ret_val.text, text, textn + 1);
     strncpy(ret_val.desc, desc, descn + 1);
     strncpy(ret_val.author, author, authorn + 1);
+    log_trace("Loaded card [%d]%s: %s by %s", ret_val.id, ret_val.text, ret_val.desc, ret_val.author);
     return ret_val;
 }
 
-void destroy_card(const card * card) {
+void del_card(const card * card) {
+    log_trace("Deleting card at %p", card);
     free(card->text);
     free(card->desc);
     free(card->author);
 }
 
 available_cards retrieve_cards(cJSON * j_cards) {
+    log_trace("Parsing cards...");
     if (! cJSON_IsArray(j_cards)) return (available_cards) {0, NULL};
     int arr_size = cJSON_GetArraySize(j_cards);
     available_cards ret_val = {arr_size, (card *)malloc(sizeof(card)*arr_size)};
-    for (int i = 0; i < arr_size; i++)
-        json_card_to_struct(cJSON_GetArrayItem(j_cards, i), i);
+    for (int i = 0; i < arr_size; i++) {
+        cJSON * j_card = cJSON_GetArrayItem(j_cards, i);
+        ret_val.cards[i] = add_card(i, cJSON_GetObjectItem(j_card, "text")->valuestring, cJSON_GetObjectItem(j_card, "desc")->valuestring, cJSON_GetObjectItem(j_card, "author")->valuestring);
+    }
     return ret_val;
 }
 
 available_cards read_card_file(char * filepath) {
+    log_trace("Loading cards from file %s", filepath);
     cJSON * json = json_from_file(filepath);
     available_cards ret_val = retrieve_cards(cJSON_GetObjectItem(json, "cards"));
     cJSON_Delete(json);
@@ -84,25 +90,30 @@ available_cards read_card_file(char * filepath) {
 }
 
 board add_board(int gridsize, const available_cards * cards){
+    log_trace("Creating board with gridsize %d", gridsize);
     board ret_val = {gridsize, (player_card **)malloc(sizeof(player_card *) * gridsize)};
     int * cards_given = random_numbers(cards->size, gridsize * gridsize);
     for (int i = 0; i < gridsize; i++) {
         ret_val.cards[i] = (player_card *)malloc(sizeof(player_card) * gridsize);
-        for (int j = 0; j < gridsize; j++)
+        for (int j = 0; j < gridsize; j++) {
+            log_trace("Adding card id %d, text %s to board", cards_given[i*gridsize + j], cards->cards[cards_given[i*gridsize + j]].text);
             ret_val.cards[i][j] = (player_card) {cards->cards + cards_given[i*gridsize + j], 0};
+        }
     }
     free(cards_given);
     return ret_val;
 }
 
 void del_board(const board * board) {
+    log_trace("Deleting board at %p", board);
     for (int i = 0; i < board->size; i++) {
         free(board->cards[i]);
     }
-    free(board->cards); // Currently a memory leak
+    free(board->cards);
 }
 
 player add_player(int id, char * name, int gridsize, const available_cards * cards) {
+    log_trace("Creating player [%d]:%s", id, name);
     int name_len = strlen(name);
     player ret_val = {id, (char *)malloc(name_len + 1), add_board(gridsize, cards)};
     strncpy(ret_val.name, name, name_len + 1);
@@ -110,12 +121,15 @@ player add_player(int id, char * name, int gridsize, const available_cards * car
 }
 
 void del_player(const player * player) {
+    log_trace("Deleting player %s", player->name);
     free(player->name);
     del_board(&player->board);
 }
 
 // Not implemented
 int parse_args(int argc, char ** argv) {
+    log_trace("Parsing args...");
+    srand(time(NULL));
     return 0;
 }
 
@@ -128,7 +142,13 @@ int main(int argc, char ** argv) {
         log_info("Successfully loaded %d cards", cards.size);
     }
     player test = add_player(0, "Test", 5, &cards);
+    log_debug("player %s has cards:", test.name);
+    for (int i = 0; i < test.board.size; i++)
+        for (int j = 0; j < test.board.size; j++)
+            log_debug("\t%s", test.board.cards[i][j].card->text);
     del_player(&test);
+    for (int i = 0; i < cards.size; i++)
+        del_card(cards.cards + i);
     free(cards.cards);
     return 0;
 }
