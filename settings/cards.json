@@ -283,7 +283,7 @@
             "tags": ["SM"]
         },
         {
-            "text": "Styrelsen har smygit in en oseriös att-sats",
+            "text": "Styrelsen har smugit in en oseriös att-sats",
             "desc": "N/A",
             "author": "Erik Hedlund",
             "tags": ["SM"]
@@ -314,6 +314,24 @@
         },
         {
             "text": "Valkandidat dyker inte upp på SM",
+            "desc": "N/A",
+            "author": "Erik Hedlund",
+            "tags": ["SM"]
+        },
+        {
+            "text": "Diskussion på samma punkt över en timme",
+            "desc": "N/A",
+            "author": "Erik Hedlund",
+            "tags": ["SM"]
+        },
+        {
+            "text": "Yrkning efter bilaga",
+            "desc": "N/A",
+            "author": "Erik Hedlund",
+            "tags": ["SM"]
+        },
+        {
+            "text": "Folk blir påminda att fokusera på valkandidaternas positiva sidor",
             "desc": "N/A",
             "author": "Erik Hedlund",
             "tags": ["SM"]
