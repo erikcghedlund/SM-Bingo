@@ -4,7 +4,9 @@
 #include <errno.h>
 #include <time.h>
 #include <string.h>
+
 #include <cjson/cJSON.h>
+#include <rxi/log.h>
 
 #ifdef _WIN32
 #include <Fileapi.h>
@@ -12,7 +14,6 @@
 #include <sys/stat.h>
 #endif
 
-#include "log.h"
 #include "game_structures.h"
 #include "json_conversion.h"
 
@@ -115,7 +116,6 @@ void del_player(const player * player) {
 
 // Not implemented
 int parse_args(int argc, char ** argv) {
-    set_log_out(stderr);
     return 0;
 }
 
@@ -123,9 +123,9 @@ int main(int argc, char ** argv) {
     parse_args(argc, argv);
     available_cards cards = read_card_file(DEFAULT_CARD_FILE);
     if (cards.size == 0)
-        log_error("Failed retrieving cards from file %s\n", DEFAULT_CARD_FILE);
+        log_error("Failed retrieving cards from file %s", DEFAULT_CARD_FILE);
     else {
-        log_info("Successfully loaded %d cards\n", cards.size);
+        log_info("Successfully loaded %d cards", cards.size);
     }
     player test = add_player(0, "Test", 5, &cards);
     del_player(&test);
