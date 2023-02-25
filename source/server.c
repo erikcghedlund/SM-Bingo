@@ -8,12 +8,6 @@
 #include <cjson/cJSON.h>
 #include <rxi/log.h>
 
-#ifdef _WIN32
-#include <Fileapi.h>
-#else
-#include <sys/stat.h>
-#endif
-
 #include "game_structures.h"
 #include "json_conversion.h"
 
@@ -145,7 +139,7 @@ int main(int argc, char ** argv) {
     log_debug("player %s has cards:", test.name);
     for (int i = 0; i < test.board.size; i++)
         for (int j = 0; j < test.board.size; j++)
-            log_debug("\t%s", test.board.cards[i][j].card->text);
+            puts(test.board.cards[i][j].card->text);
     del_player(&test);
     for (int i = 0; i < cards.size; i++)
         del_card(cards.cards + i);
