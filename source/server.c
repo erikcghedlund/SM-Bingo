@@ -24,19 +24,24 @@ int min(int x, int y) {
 }
 
 void swap(int * x, int * y) {
+    log_trace("Swapping %d and %d", *x, *y);
     int temp = *x;
     *x = *y;
     *y = temp;
 }
 
 int * random_numbers(int range, int nums) {
-    int * choises = (int *)malloc(sizeof(int)*range), * ret_val = (int *)malloc(sizeof(int)*nums);
+    int * choises = (int *)malloc(sizeof(int)*range),
+        * ret_val = (int *)malloc(sizeof(int)*nums);
     for (int i = range - 1; i > -1; i--)
         choises[i] = i;
     for (int i = 0; i < nums; i++) {
-        int index = rand()%range;
+        int index = rand()%(range-i);
         ret_val[i] = choises[index];
         swap(choises + index, choises + range - i - 1);
+        for (int i = 0; i < range; i++)
+            fprintf(stderr, "%d, ", choises[i]);
+        fputc('\n', stderr);
     }
     free(choises);
     return ret_val;
