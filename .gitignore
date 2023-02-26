@@ -53,3 +53,6 @@ dkms.conf
 # My stuff
 debug/
 third_party/
+.ycm_extra_conf.py
+compile_commands.json
+.cache
