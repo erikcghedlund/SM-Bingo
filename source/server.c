@@ -24,7 +24,6 @@ int min(int x, int y) {
 }
 
 void swap(int * x, int * y) {
-    log_trace("Swapping %d and %d", *x, *y);
     int temp = *x;
     *x = *y;
     *y = temp;
@@ -39,9 +38,6 @@ int * random_numbers(int range, int nums) {
         int index = rand()%(range-i);
         ret_val[i] = choises[index];
         swap(choises + index, choises + range - i - 1);
-        for (int i = 0; i < range; i++)
-            fprintf(stderr, "%d, ", choises[i]);
-        fputc('\n', stderr);
     }
     free(choises);
     return ret_val;
