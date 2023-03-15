@@ -16,7 +16,7 @@ RXILOG_VERSION = f9ea34994bd58ed342d2245cd4110bb5c6790153
 RXILOG_URL = https://raw.githubusercontent.com/rxi/log.c/$(RXILOG_VERSION)/src/
 RXILOG_BUILDARGS = -DLOG_USE_COLOR
 
-all:	$(TARGETS)
+all:	$(TARGETS) clean_up_cJSON
 
 clean:
 	rm -rf $(DIRECTORIES)
@@ -54,16 +54,25 @@ third_party:
 third_party/cJSON.tar.gz: third_party
 	wget $(CJSON_URL) --output-document $@ --no-clobber --quiet || :
 
-third_party/source/cjson/cJSON.c: third_party/cJSON.tar.gz third_party/source
-	tar -xf  third_party/cJSON.tar.gz cJSON-$(CJSON_VERSION)/cJSON.c
-	mv cJSON-$(CJSON_VERSION)/ -T third_party/source/cjson 2> /dev/null || rm cJSON-$(CJSON_VERSION)/ -rf
+third_party/source/cjson:
+	mkdir $@ --parent
 
-third_party/include/cjson/cJSON.h: third_party/cJSON.tar.gz third_party/include
+third_party/source/cjson/cJSON.c: third_party/cJSON.tar.gz third_party/source/cjson
+	tar -xf  third_party/cJSON.tar.gz cJSON-$(CJSON_VERSION)/cJSON.c
+	mv cJSON-$(CJSON_VERSION)/cJSON.c -t third_party/source/cjson 
+
+third_party/include/cjson:
+	mkdir $@ --parent
+
+third_party/include/cjson/cJSON.h: third_party/cJSON.tar.gz third_party/include/cjson
 	tar -xf  third_party/cJSON.tar.gz cJSON-$(CJSON_VERSION)/cJSON.h
-	mv cJSON-$(CJSON_VERSION)/ -T third_party/include/cjson 2> /dev/null || rm cJSON-$(CJSON_VERSION)/ -rf
+	mv cJSON-$(CJSON_VERSION)/cJSON.h -t third_party/include/cjson
 
 third_party/lib/cjson/cJSON.o: third_party/lib/cjson third_party/include/cjson/cJSON.h third_party/source/cjson/cJSON.c
 	$(CC) -c -o $@ third_party/source/cjson/cJSON.c $(STD) $(DEBUG) -Ithird_party/include/cjson
+
+clean_up_cJSON: third_party/lib/cjson/cJSON.o third_party/source/cjson/cJSON.c third_party/include/cjson/cJSON.h
+	rm cJSON-$(CJSON_VERSION) -rf
 
 third_party/source/rxi: third_party/source
 	mkdir $@ --parent
