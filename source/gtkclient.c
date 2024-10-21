@@ -75,6 +75,7 @@ activate (GtkApplication *app,
    */
   gtk_grid_attach (GTK_GRID (grid), button, 0, 6, 5, 1);
 
+  gtk_window_fullscreen (window);
   gtk_widget_show (window);
 
 }
@@ -85,10 +86,16 @@ main (int    argc,
 {
   GtkApplication *app;
   int status;
+  char buf[200];
 
+  FILE * f = fopen("./cards_hc.txt", "r");
+  if (f == NULL) {
+      puts(getcwd(buf, sizeof(buf)));
+      puts("Failed to open text file");
+      return 1;
+  }
   for (int i = 0; i < 25; i++) {
-        gets(cards[i]);
-        puts(cards[i]);
+        fgets(cards[i], 200, f);
   }
 
   app = gtk_application_new ("org.gtk.example", G_APPLICATION_DEFAULT_FLAGS);

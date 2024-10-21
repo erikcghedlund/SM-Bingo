@@ -5,7 +5,7 @@ DEBUG = -g -Wall
 
 DIRECTORIES = debug third_party
 LIBRARIES = debug/lib/json_conversion.o third_party/lib/rxi/log.o
-EXECUTABLES = debug/bin/server
+EXECUTABLES = debug/bin/server debug/bin/gtkclient
 HEADERS = third_party/include/cjson/cJSON.h
 TARGETS = $(EXECUTABLES)
 
@@ -15,6 +15,8 @@ CJSON_URL = https://github.com/DaveGamble/cJSON/archive/refs/tags/v$(CJSON_VERSI
 RXILOG_VERSION = f9ea34994bd58ed342d2245cd4110bb5c6790153
 RXILOG_URL = https://raw.githubusercontent.com/rxi/log.c/$(RXILOG_VERSION)/src/
 RXILOG_BUILDARGS = -DLOG_USE_COLOR
+
+GTK_FLAGS = -I/usr/include/gtk-4.0 -I/usr/include/pango-1.0 -I/usr/include/glib-2.0 -I/usr/lib/glib-2.0/include -I/usr/include/sysprof-4 -I/usr/include/harfbuzz -I/usr/include/freetype2 -I/usr/include/libpng16 -I/usr/include/libmount -I/usr/include/blkid -I/usr/include/fribidi -I/usr/include/cairo -I/usr/include/pixman-1 -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/graphene-1.0 -I/usr/lib/graphene-1.0/include -mfpmath=sse -msse -msse2 -pthread -lgtk-4 -lpangocairo-1.0 -lpango-1.0 -lharfbuzz -lgdk_pixbuf-2.0 -lcairo-gobject -lcairo -lgraphene-1.0 -lgio-2.0 -lgobject-2.0 -lglib-2.0 
 
 all:	$(TARGETS) clean_up_cJSON
 
@@ -91,3 +93,6 @@ third_party/include/rxi/log.h: third_party/include/rxi
 
 third_party/lib/rxi/log.o: third_party/lib/rxi third_party/include/rxi/log.h third_party/source/rxi/log.c
 	$(CC) -c -o $@ third_party/source/rxi/log.c $(STD) $(DEBUG) $(RXILOG_BUILDARGS) -Ithird_party/include/rxi
+
+debug/bin/gtkclient: source/gtkclient.c
+	$(CC) $< -o $@ $(GTK_FLAGS) $(DEBUG)
